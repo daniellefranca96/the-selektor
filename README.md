@@ -1,2 +1,2 @@
 # the-selektor
-Site para escolher aleatoriamente episódios de séries.
+Site to randomly choose series episodes.
