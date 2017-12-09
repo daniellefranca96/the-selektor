@@ -1,0 +1,18 @@
+{
+	"aleatory_episode": {
+		"btn": "Aleatory Episode",
+		"season": "Season",
+		"episodes": "Episodes",
+		"air_date": "Air Date",
+		"input": "Name of the tv show",
+		"filter_date": "y-MM-d",
+		"no_results": "No Results Found"
+	},
+	"languages": [
+			{"id":"en", "desc":"English"},
+			{"id":"fr", "desc":"French"},
+			{"id":"de", "desc":"German"},
+			{"id":"es", "desc":"Spanish"},
+			{"id":"pt", "desc":"Portuguese"}
+	]
+}

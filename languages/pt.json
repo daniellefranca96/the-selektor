@@ -1,0 +1,18 @@
+{
+	"aleatory_episode": {
+		"btn": "Episódio Aleatório",
+		"season": "Temporada",
+		"episodes": "Episódios",
+		"air_date": "Estréia",
+		"input": "Nome da série",
+		"filter_date": "d/MM/y",
+		"no_results": "Sem resultados"
+	},
+	"languages": [
+			{"id":"en", "desc":"Inglês"},
+			{"id":"fr", "desc":"Francês"},
+			{"id":"de", "desc":"Alemão"},
+			{"id":"es", "desc":"Espanhol"},
+			{"id":"pt", "desc":"Português"}
+	]
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="theSelektor">
+	<head>
+		<meta charset="UTF-8">
+		<title>The Selektor</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/the-selektor.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+		<script src="https://code.angularjs.org/1.5.8/angular-cookies.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.js"></script>
+		<script src="lib/ui-bootstrap-tpls-2.2.0.min.js"></script>
+		<script src="js/controllers/the-selektor.js"></script>
+		<script src="lib/themoviedbAPI.js"></script>
+		
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-88453718-1', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+		
+	</head>
+
+	<body ng-controller="theSelektorCtrl" style="margin-top:10px;">
+	<div class="container-fluid">
+		<div class="row pull-right">
+			<div class="col-lg-3 col-md-3">
+				<select ng-model="lang" ng-change="changeLanguage()" ng-options="l.id as l.desc for l in language.languages">
+				</select>
+			</div>
+		</div>
+		<h3 align="center">The Selektor</h3>		
+		<div class="panel panel-default" id="masterPanel">
+		  <div class="panel-body">
+			<input type="text" ng-model="tituloSerie" placeholder="{{language.aleatory_episode.input}}" uib-typeahead="series.name for series in getSeries($viewValue)" typeahead-loading="loadingseries" typeahead-no-results="noResults" class="form-control" typeahead-on-select="selectSeries($item, $model, $label)">
+				<i ng-show="loadingSeries" class="glyphicon glyphicon-refresh"></i>
+				<div ng-show="noResults">
+				  <i class="glyphicon glyphicon-remove"></i> {{language.aleatory_episode.no_results}}
+				</div>
+			<br>
+			<div class="row">
+				<div class="col-sm-4 text-right">
+					<img ng-src="https://image.tmdb.org/t/p/w300{{serie.img}}"  height="250" ng-if="serie.img!==undefined">
+				</div>
+				<div class="col-sm-8" ng-bind="serie.overview">
+				</div>
+			</div>
+			<br>
+			<table class="table table-bordered" ng-show="serie.seasons.length > 0">
+				<tr>
+					<th><input type="checkbox" ng-change="selectAll(serie.seasons, master)" ng-model="master" ng-init="false"></th>
+					<th>{{language.aleatory_episode.season}}</th>
+					<th>{{language.aleatory_episode.episodes}}</th>
+					<th>{{language.aleatory_episode.air_date}}</th>
+				</tr>
+				<tr ng-repeat="season in serie.seasons">
+					<td><input type="checkbox" ng-model="season.selected"></td>
+					<td>{{season.season_number}}</td>
+					<td>{{season.episode_count}}</td>
+					<td>{{season.air_date | date:language.aleatory_episode.filter_date}}</td>
+				</tr>
+			</table>
+			<button class="btn btn-primary btn-block" ng-disabled="!isSelected(serie.seasons, master) || buton_disabled" ng-if="serie.seasons.length > 0" ng-click="selectEpisode(serie)">{{language.aleatory_episode.btn}}</button>
+			<br><br>
+			<div class="row" ng-if="serie.episode!==undefined">
+				<div class="col-sm-4 text-right">
+					<img ng-src="https://image.tmdb.org/t/p/w300{{serie.episode.still_path == null ? serie.img : serie.episode.still_path}}" width="100%"  height="250">
+				</div>
+				<div class="col-sm-8">
+					<h4> Season {{serie.episode.season_number}} Episode {{serie.episode.episode_number}} - {{serie.episode.name}} - {{serie.episode.air_date}}</h4>
+					{{serie.episode.overview}}
+				</div>
+			</div>
+		</div>
+		<br>
+		</div>
+		<div>
+		  <div class="row">
+			<div class="col-sm-12 text-center">
+			   <p><b>Copyright &copy; 2016 by Danielle S. Fran&ccedil;a</b></p>
+			</div> 
+		 </div>        
+	  </div>
+	</div>
+	</body>
+
+</html>								
